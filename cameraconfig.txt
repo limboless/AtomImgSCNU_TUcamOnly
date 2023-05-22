@@ -1,0 +1,5 @@
+b'Chameleon CMLN-13S2M'&18404998,newcamera1,1
+b'Chameleon CMLN-13S2M'&18427090,newcamera2,1
+,newcamera,10
+,newcamera,10
+,newcamera,10

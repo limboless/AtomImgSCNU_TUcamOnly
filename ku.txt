@@ -1,0 +1,17 @@
+PyQt5   1+
+pyqtgraph   1+
+numpy      1
+sys   z
+os   z
+time  z
+pathlib  
+datetime   z  2
+queue
+warnings
+matplotlib     1+
+PIL       2
+cv2     1+
+scipy      2
+math      no2
+decimal
+copy

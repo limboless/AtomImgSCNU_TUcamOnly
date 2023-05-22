@@ -1,0 +1,1 @@
+DATA_PATH=d:\vscode\becAtomImg SCNU20220425\AtomImgSCNU\images
