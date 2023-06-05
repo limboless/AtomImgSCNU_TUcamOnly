@@ -1,6 +1,8 @@
 #from types import ClassMethodDescriptorType
 #############from Model.Instruments.Camera.Chameleon import Chameleon
 ###from TUDefine import *
+# from Widget.CoreWidget.AnalyseDataWidget import PlotWindow
+from Widget.CoreWidget.ImgQueueWidget import PlotWindow
 from TUCAM import *
 from Utilities.Helper import settings, Helper
 from Utilities.IO import IOHelper
@@ -911,7 +913,6 @@ class MainWindow(QMainWindow):
         """
         load images to image queue, with image name and data
         """
-        print("load_img2stack")
         settings.widget_params["Image Display Setting"]["imgSource"] = "disk"
         fpath = IOHelper.get_config_setting('DATA_PATH')
 
@@ -996,6 +997,7 @@ class MainWindow(QMainWindow):
         if img_dict is None:
             return
         self.plot_main_window.img_plot(img_dict)
+        print("update_main_plot_win")
         settings.imgData["Img_data"] = img_dict['img_data']
 
     def update_image_queue(self, img_dict):   #hardware_mode do this
@@ -1249,8 +1251,36 @@ class Worker(QObject):
                                 #modi
                                 # self.sig_hardware_mode_img.emit({'img_name': str(timestamp)[2:19]+str(img_name1), 'img_data': Helper.split_list(img_data)})
                                 settings.StackNum = settings.StackNum + 1
-                                self.sig_hardware_mode_img.emit({'img_name': str(settings.StackNum)+str(img_name1), 
-                                                                 'img_data': img_data})
+                                # self.sig_hardware_mode_img.emit({'img_name': str(settings.StackNum)+str(img_name1), 
+                                #                                  'img_data': img_data})
+                                ###################
+                                # btn_state()
+
+                                ###################
+                                img_dict = {'img_data': img_data, 
+                                            'img_name': str(settings.StackNum)+str(img_name1)}
+                                img_name = str(settings.StackNum)+str(img_name1)
+                                # img_name = img_path.stem
+                                img = {
+                                    'img_name': img_name,
+                                    'img_data': img_data}
+                                # settings.absimgDatas[self.myserial] = img_data
+                                plotMainWindow = PlotMainWindow()
+                                plotMainWindow.img_plot(img_dict)
+                                # plotMainWindow.btn_state()
+
+
+                                # import pyqtgraph as pg
+                                # self.video = pg.ImageItem()
+                                # img_dict = {'img_data': img_data, 
+                                #             'img_name': str(settings.StackNum)+str(img_name1)}
+                                # self.img_label = img_dict['img_name']
+                                
+                                # settings.imgData["Img_data"] = img_dict['img_data']
+                                # img_dict = pyqtSignal(object)
+                                # plotWindow = PlotWindow()
+                                # plotWindow.img_dict.emit(img_dict)
+                                ###################
                                 # self.sig_hardware_mode_img.emit({'img_name': str(settings.StackNum)+str(img_name1), 'img_data': Helper.split_list(img_data)})
                                 settings.absimgData[i] = img_data
                                 # settings.absimgData[i] = Helper.split_list(img_data)
@@ -1279,7 +1309,13 @@ class Worker(QObject):
                         settings.StackNum = settings.StackNum + 1
                         self.sig_hardware_mode_img.emit({'img_name': str(settings.StackNum)+str(img_name1), 
                                                          'img_data': settings.absimgData[3]})
-                        
+                        ###################
+                        # self.video = pg.ImageItem()
+                        # self.img_label = img_dict['img_name']
+                        # img_dict = {'img_data': np.array(self.video.image), 'img_name': self.img_label}
+                        # settings.imgData["Img_data"] = img_dict['img_data']
+                        # self.img_dict.emit(img_dict)
+                        ###################
 
 
 

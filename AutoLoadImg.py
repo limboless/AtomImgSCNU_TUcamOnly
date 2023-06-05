@@ -12,7 +12,6 @@ def file_load_imgs(self):
         Load previous image to stack.
         :return:
         """
-        print("file_load_imgs")
         settings.widget_params["Image Display Setting"]["imgSource"] = "disk"
         fpath = IOHelper.get_config_setting('DATA_PATH')
         img_fpath = QFileDialog.getOpenFileNames(self, "Open File", fpath, "Image files(*.npy *.data *.tif)")  # name path

@@ -1,1 +1,1 @@
-DATA_PATH=d:\vscode\becAtomImg SCNU20220425\AtomImgSCNU\Model\Instruments\Camera\TUCamdll\pic\ODimage\
+DATA_PATH=d:\vscode\becAtomImg SCNU20220425\AtomImgSCNU_TUcamOnly\Model\Instruments\Camera\TUCamdll\pic\ODimage\

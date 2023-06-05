@@ -132,6 +132,7 @@ class PlotWindow(QWidget):
         img_dict = {'img_data': np.array(self.video.image), 'img_name': self.img_label}
         settings.imgData["Img_data"] = img_dict['img_data']
         self.img_dict.emit(img_dict)
+        print("tn_state(self)")
 
     def save_image(self):
         # try:

@@ -1,0 +1,30 @@
+import numpy as np
+import copy
+from PIL import Image
+
+#########################
+# 涓€娆″鐞嗗瓨鏀惧湪鐩稿悓鏂囦欢澶逛笅鐨勭収鐗囷紙tif->npy锛?
+# 灏唗if鏂囦欢涓庢python鏂囦欢鏀惧湪鍚屼竴鏂囦欢澶逛笅
+# 璇诲彇tif鏂囦欢
+for i in range(1,100) :
+    img_name1 = "843"  #灏咺mage淇敼涓哄浘鐗囧懡鍚嶃€備緥濡傚浘鐗囧悕涓?43_00001,鍒欎慨鏀笽mage涓?43
+    if i < 10 :
+        ImgName = './' + str(img_name1) + '_' +  '0000' + str(i) + '.tif'
+    elif i == 100:
+        ImgName = './' + str(img_name1) + '_' +  '00' + str(i) + '.tif'
+    else:
+        ImgName = './' + str(img_name1) + '_' + '000' + str(i) + '.tif'
+    # tmpWI1 = "D:\\vscode\\becAtomImg SCNU20220425\\AtomImgSCNU\\test\\843_00002.tif"
+    tmpWI = Image.open(ImgName)
+    
+    # 灏唗if鏂囦欢杞崲涓簄umpy鏁扮粍
+    tif_array = np.array(tmpWI)
+    # 淇濆瓨涓簄py鏂囦欢
+    if i < 10 :
+        ImgNamen = './' + str(img_name1) + '_' +  '0000' + str(i) + '.npy'
+    elif i == 101:
+        ImgName = './' + str(img_name1) + '_' +  '00' + str(i) + '.npy'
+    else:
+        ImgNamen = './' + str(img_name1) + '_' + '000' + str(i) + '.npy'
+    # ImgNamen = "D:\\vscode\\becAtomImg SCNU20220425\\AtomImgSCNU\\test\\843_00002.npy"
+    np.save(ImgNamen, tif_array)
