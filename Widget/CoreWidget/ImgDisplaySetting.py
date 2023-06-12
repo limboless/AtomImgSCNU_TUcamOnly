@@ -27,12 +27,12 @@ class ImgDisplaySetting(QWidget):
 
         self.pfMin = QLineEdit(self)
         self.pfMin.setValidator(QIntValidator(self.pfMin))
-        self.pfMin.setMaxLength(3)
+        self.pfMin.setMaxLength(5)
 
         self.tolab = QLabel('to', self)
         self.pfMax = QLineEdit(self)
         self.pfMax.setValidator(QIntValidator(self.pfMax))
-        self.pfMax.setMaxLength(3)
+        self.pfMax.setMaxLength(5)
 
         self.roi = QCheckBox("ROI", self)
         self.roi_size = QLineEdit(str(settings.widget_params["Analyse Data Setting"]["roisize"]), self)

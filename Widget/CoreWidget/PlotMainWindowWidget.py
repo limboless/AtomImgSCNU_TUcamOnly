@@ -488,6 +488,7 @@ class PlotMainWindow(QWidget):
         # print(img_dict['img_data'][794,420:450])
         self.data = img_dict['img_data']
         print('self.data_shape is',self.data_shape)
+        print(img_dict) #改了还未运行
         # print('self.data is',self.data)
 
 
@@ -574,8 +575,10 @@ class PlotMainWindow(QWidget):
             # Reloading improves operational efficiency
             settings.imgData["Img_photon_range"] = deepcopy(settings.imgData["Img_data"])
             try:
-                settings.imgData["Img_photon_range"][settings.imgData["Img_data"] <= int(settings.widget_params["Image Display Setting"]["pfMin"])] = settings.widget_params["Image Display Setting"]["pfMin"]
-                settings.imgData["Img_photon_range"][settings.imgData["Img_data"] >= int(settings.widget_params["Image Display Setting"]["pfMax"])] = settings.widget_params["Image Display Setting"]["pfMax"]
+                settings.imgData["Img_photon_range"][settings.imgData["Img_data"] <= float(settings.widget_params["Image Display Setting"]["pfMin"])] = settings.widget_params["Image Display Setting"]["pfMin"]
+                print('imgDatamax',max(settings.imgData))
+                print('Img_photon_range',settings.imgData["Img_photon_range"])
+                settings.imgData["Img_photon_range"][settings.imgData["Img_data"] >= float(settings.widget_params["Image Display Setting"]["pfMax"])] = settings.widget_params["Image Display Setting"]["pfMax"]
             except ValueError:
                 print('The edit box cannot be empty')
             self.img.setImage(settings.imgData["Img_photon_range"])

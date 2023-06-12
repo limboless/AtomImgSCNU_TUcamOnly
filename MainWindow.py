@@ -2,7 +2,7 @@
 #############from Model.Instruments.Camera.Chameleon import Chameleon
 ###from TUDefine import *
 # from Widget.CoreWidget.AnalyseDataWidget import PlotWindow
-from Widget.CoreWidget.ImgQueueWidget import PlotWindow
+# from Widget.CoreWidget.ImgQueueWidget import PlotWindow
 from TUCAM import *
 from Utilities.Helper import settings, Helper
 from Utilities.IO import IOHelper
@@ -997,6 +997,7 @@ class MainWindow(QMainWindow):
         if img_dict is None:
             return
         self.plot_main_window.img_plot(img_dict)
+        # print(img_dict)
         print("update_main_plot_win")
         settings.imgData["Img_data"] = img_dict['img_data']
 
@@ -1092,30 +1093,7 @@ class Worker(QObject):
         ###self.camera.set_grab_timeout(grab_timeout=10)
         ###
 
-        # TUCAM_Dev_Open = TUSDKdll.TUCAM_Dev_Open
-        # TUCAMOPEN = TUCAM_OPEN(0, 0)
-        # TUCAM_Dev_Open(pointer(TUCAMOPEN));###
         
-
-        # print("TUCAM_Reg_Read")
-        
-        # # SN
-        # TUCAM_Reg_Read = TUSDKdll.TUCAM_Reg_Read
-        # cSN = (c_char * 64)() 
-        # pSN = cast(cSN, c_char_p)
-        # TUCAMREGRW = TUCAM_REG_RW(1, pSN, 64)
-        # TUCAM_Reg_Read(c_int64(TUCAMOPEN.hIdxTUCam), TUCAMREGRW)
-        # #print(bytes(bytearray(cSN)))
-        # print(string_at(pSN))                  ###
-
-
-        # m_frame = TUCAM_FRAME()
-        # m_fs    = TUCAM_FILE_SAVE() 
-        # m_format = TUIMG_FORMATS
-        # m_frformat= TUFRM_FORMATS
-        # m_capmode = TUCAM_CAPTURE_MODES
-        # TUCAM_Buf_Alloc = TUSDKdll.TUCAM_Buf_Alloc
-        # TUCAM_Cap_Start = TUSDKdll.TUCAM_Cap_Start
 ##################
 
         # self.camera.setGRAB_MODE()
@@ -1125,22 +1103,6 @@ class Worker(QObject):
         # set a low grab timeout to avoid crash when retrieve image.
         ###self.camera.set_grab_timeout(grab_timeout=10)
         ###
-
-
-        # TUCAM_Buf_WaitForFrame = TUSDKdll.TUCAM_Buf_WaitForFrame
-
-        # TUCAM_Buf_AbortWait = TUSDKdll.TUCAM_Buf_AbortWait
-        # TUCAM_Cap_Stop = TUSDKdll.TUCAM_Cap_Stop
-        # TUCAM_Buf_Release = TUSDKdll.TUCAM_Buf_Release
-        # TUCAM_File_SaveImage = TUSDKdll.TUCAM_File_SaveImage
-        # m_fs.nSaveFmt = m_format.TUFMT_TIF.value 
-
-        # m_frame.pBuffer     = 0;
-        # m_frame.ucFormatGet = m_frformat.TUFRM_FMT_RAW.value;
-        # m_frame.uiRsdSize   = 1;         #需要获取的帧数，1                 
-        #print(m_frame.pBuffer)
-        #print(m_frame.ucFormatGet) ###
-
 
 
 
@@ -1251,24 +1213,24 @@ class Worker(QObject):
                                 #modi
                                 # self.sig_hardware_mode_img.emit({'img_name': str(timestamp)[2:19]+str(img_name1), 'img_data': Helper.split_list(img_data)})
                                 settings.StackNum = settings.StackNum + 1
-                                # self.sig_hardware_mode_img.emit({'img_name': str(settings.StackNum)+str(img_name1), 
-                                #                                  'img_data': img_data})
+                                self.sig_hardware_mode_img.emit({'img_name': str(settings.StackNum)+str(img_name1), 
+                                                                 'img_data': img_data})
                                 ###################
                                 # btn_state()
 
                                 ###################
-                                img_dict = {'img_data': img_data, 
-                                            'img_name': str(settings.StackNum)+str(img_name1)}
-                                img_name = str(settings.StackNum)+str(img_name1)
-                                # img_name = img_path.stem
-                                img = {
-                                    'img_name': img_name,
-                                    'img_data': img_data}
-                                # settings.absimgDatas[self.myserial] = img_data
-                                plotMainWindow = PlotMainWindow()
-                                plotMainWindow.img_plot(img_dict)
-                                # plotMainWindow.btn_state()
-
+                                # img_dict = {'img_data': img_data, 
+                                #             'img_name': str(settings.StackNum)+str(img_name1)}
+                                # img_name = str(settings.StackNum)+str(img_name1)
+                                # # img_name = img_path.stem
+                                # img = {
+                                #     'img_name': img_name,
+                                #     'img_data': img_data}
+                                # # settings.absimgDatas[self.myserial] = img_data
+                                # plotMainWindow = PlotMainWindow()
+                                # plotMainWindow.img_plot(img) #去掉输入试一试？
+                                # # plotMainWindow.btn_state()
+                                # MainWindow.plot_main_window.img_plot(img)
 
                                 # import pyqtgraph as pg
                                 # self.video = pg.ImageItem()
@@ -1309,13 +1271,9 @@ class Worker(QObject):
                         settings.StackNum = settings.StackNum + 1
                         self.sig_hardware_mode_img.emit({'img_name': str(settings.StackNum)+str(img_name1), 
                                                          'img_data': settings.absimgData[3]})
-                        ###################
-                        # self.video = pg.ImageItem()
-                        # self.img_label = img_dict['img_name']
-                        # img_dict = {'img_data': np.array(self.video.image), 'img_name': self.img_label}
-                        # settings.imgData["Img_data"] = img_dict['img_data']
-                        # self.img_dict.emit(img_dict)
-                        ###################
+                        self.sig_video_mode_img.emit({'img_name': str(settings.StackNum)+str(img_name1), 
+                                                      'img_data': settings.absimgData[3]})
+
 
 
 
